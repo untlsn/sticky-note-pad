@@ -1,47 +1,26 @@
-import logo from '~/assets/images/logo.svg';
 import '~/App.css';
-import store from '~/store/store';
+import Header from '~/components/organisms/Header';
+import StickyIcon from '~/components/atoms/StickyIcon';
+import Button from '~/components/atoms/Button';
 
 export default function App() {
   return (
-    <div className="text-center">
-      <header className="App-header">
-        <img src={logo} className="App-image" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button
-            type="button"
-            className="App-button"
-            onClick={store.increment}
-          >
-            count is: <O>{() => store.count}</O>
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p className="children:text-react-blue">
-          <a
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          <span> | </span>
-          <a
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-          <span> | </span>
-          <Link to="/about">
-            About
-          </Link>
-        </p>
-      </header>
-    </div>
+    <>
+      <Header />
+      <main className="h-screen flex-center flex-col">
+        <article>
+          <header className="text-end space-y-2 relative z-1">
+            <h1 className="text-5xl font-bold mr-2">
+              Sticky note pad
+            </h1>
+            <p>
+              Your notes
+            </p>
+            <StickyIcon className="absolute -left-3/4 -top-5/2 -rotate-15 scale-80 -z-1" />
+          </header>
+          <Button className="mt-20">Create first note</Button>
+        </article>
+      </main>
+    </>
   );
 }
