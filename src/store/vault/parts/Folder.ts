@@ -1,18 +1,11 @@
-import {
-  IMapType, IModelType, IType, ITypeUnion, types,
-} from 'mobx-state-tree';
-import File from '~/store/vault/parts/File';
+import { types } from 'mobx-state-tree';
+import strictType from '~/helpers/strictType';
 
-type Folder = IModelType<{
-  type: IType<'folder' | undefined, 'folder', 'folder'>,
-  name: IType<string | undefined, string, string>
-  files: IMapType<ITypeUnion<Folder | File, Folder | File, Folder | File>>
-}, {}>
-
-const Folder = types.model({
-  type: 'folder',
+const Folder = types.model('Folder', {
+  type: strictType('folder'),
   name: '',
-  files: types.union(types.late(() => Folder), File),
-}) as any as Folder;
+  root: types.string,
+  children: types.array(types.string),
+});
 
 export default Folder;

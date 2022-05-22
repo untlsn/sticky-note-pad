@@ -1,4 +1,5 @@
 import { rootStyle } from '~/pages/vault';
+import vault from '~/store/vault';
 
 interface NavButtonProps {
   icon: string,
@@ -21,11 +22,29 @@ function VaultNav() {
     <aside className="flex-[1] bg-gray-pale dark:bg-gray-dark rounded-xl" style={rootStyle}>
       <nav>
         <ul className="flex-center gap-8 p-4 text-3xl">
-          <NavButton icon="i-bi-file-earmark-plus" alt="add file" />
-          <NavButton icon="i-bi-folder-plus" alt="add folder" />
-          <NavButton icon="i-bi-filter" alt="filter" />
+          <NavButton
+            icon="i-bi-file-earmark-plus"
+            alt="add file"
+            onClick={() => {
+              vault.createFile();
+            }}
+          />
+          <NavButton
+            icon="i-bi-folder-plus"
+            alt="add folder"
+          />
+          <NavButton
+            icon="i-bi-filter"
+            alt="filter"
+          />
         </ul>
       </nav>
+      <div className="text-2xl font-bold px-6 py-4 capitalize">
+        <O>{() => (
+          vault.selectedVault?.name
+        )}
+        </O>
+      </div>
     </aside>
   );
 }
