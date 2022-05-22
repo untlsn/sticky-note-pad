@@ -3,6 +3,7 @@ import { useRoutes } from 'react-router-dom';
 import { autorun } from 'mobx';
 import pages from '~react-pages';
 import settings from '~/store/settings';
+import Header from '~/components/organisms/Header';
 
 export default function App() {
   const routes = useRoutes(pages);
@@ -15,6 +16,7 @@ export default function App() {
 
   return (
     <div className="dark:(bg-[#121212] text-white) min-h-screen">
+      <Header />
       <Suspense fallback={<p>Loading...</p>}>
         {routes}
       </Suspense>

@@ -7,9 +7,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        react: {
-          blue: '#61dafb',
-          dark: '#282c34',
+        gray: {
+          pale: '#EEEEEE',
+          dark: '#1F1F1F',
         }
       },
     },
