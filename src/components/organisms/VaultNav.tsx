@@ -52,8 +52,9 @@ function VaultNav() {
           const setSelected = () => vault.selected.setFile(fileID);
 
           return (
-            <li key={fileID} className={`px-10 py-1  ${isSelected(fileID) ? 'bg-black/70' : ''}`}>
+            <li key={fileID}>
               <button
+                className={`w-full text-left px-10 py-1  ${isSelected(fileID) ? 'bg-black/5 dark:bg-black/70' : ''}`}
                 type="button"
                 onClick={setSelected}
               >

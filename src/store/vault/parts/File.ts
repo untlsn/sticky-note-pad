@@ -12,6 +12,9 @@ const File = types
     changeName(newName: string) {
       self.name = newName;
     },
+    changeText(newText: string) {
+      self.text = newText;
+    },
   }));
 
 export default File;
