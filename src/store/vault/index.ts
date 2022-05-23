@@ -36,7 +36,7 @@ const VaultStore = types
       const newID = nanoid();
 
       self.files.set(newID, File.create({ root: vaultID }));
-      self.selectedVault.children.push(newID);
+      self.selectedVault?.children?.push?.(newID);
       self.selected.file = newID;
     },
     createVault(name: string) {
