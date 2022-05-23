@@ -4,7 +4,7 @@ import strictType from '~/helpers/strictType';
 const File = types.model('File', {
   type: strictType('file'),
   root: types.string,
-  name: '',
+  name: 'Untitled',
   text: '',
 });
 

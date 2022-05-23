@@ -5,10 +5,16 @@ import Folder from '~/store/vault/parts/Folder';
 import File from '~/store/vault/parts/File';
 import Vault from '~/store/vault/parts/Vault';
 
-const Selected = types.model('Selected', {
-  vault: '',
-  file: '',
-});
+const Selected = types
+  .model('Selected', {
+    vault: '',
+    file: '',
+  })
+  .actions((self) => ({
+    setFile(fileID: string) {
+      self.file = fileID;
+    },
+  }));
 
 const VaultStore = types
   .model('VaultStore', {
@@ -18,13 +24,17 @@ const VaultStore = types
   })
   .views((self) => ({
     get selectedVault() {
-      return self.vaults.get(self.selected.vault);
+      return self.vaults.get(self.selected.vault) || { name: '', children: [] as string[] };
     },
   }))
   .actions((self) => ({
     createFile() {
-      const { vault } = self.selected;
-      self.files.set(nanoid(), File.create({ root: vault }));
+      const vaultID = self.selected.vault;
+      const newID = nanoid();
+
+      self.files.set(newID, File.create({ root: vaultID }));
+      self.selectedVault.children.push(newID);
+      self.selected.file = newID;
     },
     createVault(name: string) {
       const id = nanoid();

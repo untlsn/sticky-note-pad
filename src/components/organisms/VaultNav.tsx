@@ -17,6 +17,8 @@ function NavButton(props: NavButtonProps) {
   );
 }
 
+const isSelected = (fileID: string) => vault.selected.file == fileID;
+
 function VaultNav() {
   return (
     <aside className="flex-[1] bg-gray-pale dark:bg-gray-dark rounded-xl" style={rootStyle}>
@@ -41,10 +43,27 @@ function VaultNav() {
       </nav>
       <div className="text-2xl font-bold px-6 py-4 capitalize">
         <O>{() => (
-          vault.selectedVault?.name
+          vault.selectedVault.name
         )}
         </O>
       </div>
+      <ul className="space-y-2">
+        <O>{() => vault.selectedVault?.children.map((fileID) => {
+          const setSelected = () => vault.selected.setFile(fileID);
+
+          return (
+            <li key={fileID} className={`px-10 py-1  ${isSelected(fileID) ? 'bg-black/70' : ''}`}>
+              <button
+                type="button"
+                onClick={setSelected}
+              >
+                {vault.files.get(fileID)?.name}
+              </button>
+            </li>
+          );
+        })}
+        </O>
+      </ul>
     </aside>
   );
 }

@@ -3,7 +3,7 @@ import strictType from '~/helpers/strictType';
 
 const Folder = types.model('Folder', {
   type: strictType('folder'),
-  name: '',
+  name: 'Untitled',
   root: types.string,
   children: types.array(types.string),
 });
