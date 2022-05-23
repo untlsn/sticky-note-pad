@@ -26,6 +26,9 @@ const VaultStore = types
     get selectedVault() {
       return self.vaults.get(self.selected.vault) || { name: '', children: [] as string[] };
     },
+    get selectedFile() {
+      return self.files.get(self.selected.file);
+    },
   }))
   .actions((self) => ({
     createFile() {
