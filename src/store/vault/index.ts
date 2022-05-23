@@ -24,7 +24,7 @@ const VaultStore = types
   })
   .views((self) => ({
     get selectedVault() {
-      return self.vaults.get(self.selected.vault) || { name: '', children: [] as string[] };
+      return self.vaults.get(self.selected.vault);
     },
     get selectedFile() {
       return self.files.get(self.selected.file);

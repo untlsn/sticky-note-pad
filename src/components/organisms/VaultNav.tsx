@@ -43,12 +43,12 @@ function VaultNav() {
       </nav>
       <div className="text-2xl font-bold px-6 py-4 capitalize">
         <O>{() => (
-          vault.selectedVault.name
+          vault.selectedVault?.name
         )}
         </O>
       </div>
       <ul className="space-y-2">
-        <O>{() => vault.selectedVault?.children.map((fileID) => {
+        <O>{() => vault.selectedVault?.children?.map?.((fileID) => {
           const setSelected = () => vault.selected.setFile(fileID);
 
           return (
