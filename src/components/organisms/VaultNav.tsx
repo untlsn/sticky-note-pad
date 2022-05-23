@@ -1,5 +1,6 @@
 import { rootStyle } from '~/pages/vault';
 import vault from '~/store/vault';
+import isFolder from '~/store/vault/helpers/isFolder';
 
 interface NavButtonProps {
   icon: string,
@@ -27,13 +28,12 @@ function VaultNav() {
           <NavButton
             icon="i-bi-file-earmark-plus"
             alt="add file"
-            onClick={() => {
-              vault.createFile();
-            }}
+            onClick={vault.createFile}
           />
           <NavButton
             icon="i-bi-folder-plus"
             alt="add folder"
+            onClick={vault.createFolder}
           />
           <NavButton
             icon="i-bi-filter"
@@ -50,15 +50,27 @@ function VaultNav() {
       <ul className="space-y-2">
         <O>{() => vault.selectedVault?.children?.map?.((fileID) => {
           const setSelected = () => vault.selected.setFile(fileID);
+          const file = vault.files.get(fileID);
 
           return (
-            <li key={fileID}>
+            <li key={fileID} className="relative">
+              <O>{() => isFolder(file) && (
+                <button
+                  type="button"
+                  className={`absolute inset-y-0 left-4 my-auto i-bi-caret-right-fill transition-transform ${
+                    file.isOpen ? 'rotate-90' : ''}`}
+                  onClick={file.switchOpen}
+                >
+                  <span className="hidden">Open folders</span>
+                </button>
+              )}
+              </O>
               <button
                 className={`w-full text-left px-10 py-1  ${isSelected(fileID) ? 'bg-black/5 dark:bg-black/70' : ''}`}
                 type="button"
                 onClick={setSelected}
               >
-                {vault.files.get(fileID)?.name}
+                {file?.name}
               </button>
             </li>
           );

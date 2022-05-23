@@ -32,11 +32,20 @@ const VaultStore = types
   }))
   .actions((self) => ({
     createFile() {
-      const vaultID = self.selected.vault;
       const newID = nanoid();
 
-      self.files.set(newID, File.create({ root: vaultID }));
-      self.selectedVault?.children?.push?.(newID);
+      self.files.set(newID, File.create({ root: self.selected.vault }));
+      if (self.selectedVault) {
+        self.selectedVault.children.push(newID);
+      }
+      self.selected.file = newID;
+    },
+    createFolder() {
+      const newID = nanoid();
+      self.files.set(newID, Folder.create({ root: self.selected.vault }));
+      if (self.selectedVault) {
+        self.selectedVault.children.push(newID);
+      }
       self.selected.file = newID;
     },
     createVault(name: string) {
