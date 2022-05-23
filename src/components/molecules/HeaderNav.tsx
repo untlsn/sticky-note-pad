@@ -5,8 +5,12 @@ function HeaderNav() {
   return (
     <nav>
       <ul className="flex gap-4 items-center">
-        <NavPoint href="/vault" icon="i-bi-safe" />
-        <NavPoint href="/settings" icon="i-bi-gear" />
+        <NavPoint href="/vaults" icon="i-bi-safe">
+          Vaults
+        </NavPoint>
+        <NavPoint href="/settings" icon="i-bi-gear">
+          Settings
+        </NavPoint>
         <ThemeSwitch />
       </ul>
     </nav>
